@@ -15,15 +15,22 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script defer src="./static/script.js"></script>
     <title>pure platform blog</title>
   </head>
   <body>
     <h1 class="display-1">Pure platform Blog</h1>
     <p class="display-3">Mohammed Sarhad Ahmed</p>
-    <p class="display-3">077099527177</p>
+    <p class="display-3">07709952717</p>
 
-    <form method="post" class="form" action="/newpost">
+    <form method="post" class="form">
       <div class="mb-3 field">
         <input
           type="text"
@@ -47,6 +54,35 @@
       </div>
       <button type="submit" class="btn btn-info btn-lg">Post the blog</button>
     </form>
-    <div class="card"></div>
+    <div class="card">
+      <% blogs.forEach(blog => { %>
+      <div class="a-card">
+        <div class="card-header">
+          <span data-type="username"> <%= blog.name %> </span>
+          <div>
+            <i
+              class="fa-regular fa-pen-to-square"
+              data-id="<%= blog.id %>"
+              data-type="edit"
+            ></i>
+            <i
+              class="fa-solid fa-delete-left"
+              data-id="<%= blog.id %>"
+              data-type="delete"
+            >
+            </i>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-text" data-type="content"><%= blog.content %></p>
+          <p class="card-text" data-type="date">
+            <%= blog.postDate.toLocaleString() %>
+          </p>
+        </div>
+      </div>
+      <% }) %> <% if(blogs.length>0){ %>
+      <button type="reset" class="btn btn-danger deleteAll">Delete All</button>
+      <% } %>
+    </div>
   </body>
 </html>

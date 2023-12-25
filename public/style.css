@@ -58,9 +58,31 @@ button,
 .card {
   margin-top: 10px;
   width: 50%;
-  margin: 20px auto;
+  margin: 20px auto !important;
   border: none;
-  background-color: #31304d;
   color: white;
-  margin-bottom: 10px;
+  background-color: #161a30;
+  gap: 20px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.a-card {
+  background-color: #31304d;
+}
+.btn-danger {
+  margin: 10px auto;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+.card-header I {
+  margin-left: 7px;
+}
+
+i:hover {
+  cursor: pointer;
+  color: red;
 }
