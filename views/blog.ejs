@@ -1,5 +1,9 @@
+<% blogs.sort((a,b)=>{ if(a.postDate>b.postDate){ return -1} else return 1 }) %>
+
 <!DOCTYPE html>
 <html lang="en">
+  %> <% const isThereBlogByCurrentUser=blogs.some((blog)=>
+  blog.username===username) %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,11 +28,40 @@
     />
     <script defer src="./static/script.js"></script>
     <title>pure platform blog</title>
+    <style>
+      .the-card {
+        display: flex;
+        gap: 20px;
+      }
+
+      .likes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+      }
+    </style>
   </head>
   <body>
+    <a
+      href="/logout"
+      id="logout"
+      class="btn btn-danger"
+      style="
+        margin-left: auto;
+        margin-top: 10px;
+        margin-right: 5%;
+        display: block;
+        width: 100px;
+      "
+    >
+      Logout
+    </a>
+
     <h1 class="display-1">Pure platform Blog</h1>
-    <p class="display-3">Mohammed Sarhad Ahmed</p>
-    <p class="display-3">07709952717</p>
+    <p class="display-3">
+      Welcome to the blog <span id="username"><%=username%></span> !
+    </p>
 
     <form method="post" class="form">
       <div class="mb-3 field">
@@ -36,7 +69,8 @@
           type="text"
           class="form-control"
           id="name"
-          placeholder="Input your name !"
+          value="<%= username %>"
+          disabled
           required
         />
       </div>
@@ -56,33 +90,57 @@
     </form>
     <div class="card">
       <% blogs.forEach(blog => { %>
-      <div class="a-card">
-        <div class="card-header">
-          <span data-type="username"> <%= blog.name %> </span>
-          <div>
-            <i
-              class="fa-regular fa-pen-to-square"
-              data-id="<%= blog.id %>"
-              data-type="edit"
-            ></i>
-            <i
-              class="fa-solid fa-delete-left"
-              data-id="<%= blog.id %>"
-              data-type="delete"
-            >
-            </i>
+      <div class="the-card">
+        <div class="likes">
+          <i
+            class="fa-solid fa-up-long"
+            data-type="up"
+            data-id="<%= blog.id %>"
+          ></i>
+          <span class="numOflikes"><%=blog.numberOfLikes%></span>
+          <i
+            class="fa-solid fa-down-long"
+            data-type="down"
+            data-id="<%= blog.id %>"
+          ></i>
+        </div>
+        <div class="a-card">
+          <div class="card-header">
+            <span data-type="username" data-username="<%= blog.username  %>">
+              <%= username===blog.username?'YOU':blog.username %>
+            </span>
+            <% if (blog.username===username) { %>
+            <div>
+              <i
+                class="fa-regular fa-pen-to-square"
+                data-id="<%= blog.id %>"
+                data-type="edit"
+              ></i>
+              <i
+                class="fa-solid fa-delete-left"
+                data-id="<%= blog.id %>"
+                data-type="delete"
+              >
+              </i>
+            </div>
+
+            <% } %>
+          </div>
+          <div class="card-body">
+            <p class="card-text" data-type="content"><%= blog.content %></p>
+            <p class="card-text" data-type="date">
+              <%= blog.postDate.toLocaleString() %>
+            </p>
           </div>
         </div>
-        <div class="card-body">
-          <p class="card-text" data-type="content"><%= blog.content %></p>
-          <p class="card-text" data-type="date">
-            <%= blog.postDate.toLocaleString() %>
-          </p>
-        </div>
       </div>
-      <% }) %> <% if(blogs.length>0){ %>
-      <button type="reset" class="btn btn-danger deleteAll">Delete All</button>
-      <% } %>
+      <% }) %> <% if (isThereBlogByCurrentUser) { %><button
+        type="reset"
+        class="btn btn-danger deleteAll"
+      >
+        Delete All Your posts
+      </button>
+      <%}%>
     </div>
   </body>
 </html>

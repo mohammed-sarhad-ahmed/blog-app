@@ -56,19 +56,19 @@ button,
   font-family: "Poppins", sans-serif;
 }
 .card {
-  margin-top: 10px;
-  width: 50%;
-  margin: 20px auto !important;
+  margin: 50px auto;
+  width: 80%;
   border: none;
   color: white;
   background-color: #161a30;
-  gap: 20px !important;
+  gap: 30px !important;
   display: flex;
   flex-direction: column;
 }
 
 .a-card {
   background-color: #31304d;
+  width: 90%;
 }
 .btn-danger {
   margin: 10px auto;
@@ -85,4 +85,17 @@ button,
 i:hover {
   cursor: pointer;
   color: red;
+}
+
+.the-card i {
+  text-align: center;
+}
+.numOflikes {
+  font-weight: 700;
+  font-size: larger;
+}
+@media (max-width: 800px) {
+  .card {
+    width: 90%;
+  }
 }
